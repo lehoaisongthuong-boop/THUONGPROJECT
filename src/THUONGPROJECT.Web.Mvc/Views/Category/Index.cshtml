@@ -1,0 +1,135 @@
+@{
+    ViewBag.Title = "Quản lý danh mục";
+    ViewBag.CurrentPageName = "Category"; // Phải trùng với tên ở Bước 2 để menu tự sáng lên
+}
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>@ViewBag.Title</h1>
+            </div>
+            <div class="col-sm-6 text-sm-right">
+                <button type="button" class="btn btn-primary" id="btnCreateCategory">
+                    <i class="fa fa-plus-square"></i> Thêm mới
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-md-6">
+                        <!-- Khung tìm kiếm -->
+                        <div class="input-group">
+                            <input type="text" id="txtSearchKeyword" class="form-control" placeholder="Tìm kiếm danh mục...">
+                            <div class="input-group-append">
+                                <button class="btn btn-default" id="btnSearch" type="button">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body table-responsive p-0">
+                <table class="table table-hover text-nowrap" id="categoryTable">
+                    <thead>
+                        <tr>
+                            <th>Tên danh mục</th>
+                            <th>Mô tả</th>
+                            <th style="width: 150px">Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Giai đoạn 4 mình sẽ dùng JS đổ dữ liệu API vào đây -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+
+</section>
+
+<!-- Dán phía trên section scripts -->
+<div class="modal fade" id="CategoryCreateModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form name="categoryCreateForm" role="form" class="form-horizontal">
+                <div class="modal-header">
+                    <h5 class="modal-title">Thêm danh mục mới</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group row required">
+                        <label class="col-md-3 col-form-label">Tên danh mục</label>
+                        <div class="col-md-9">
+                            <!-- Thuộc tính name="Name" phải viết hoa chữ cái đầu cho khớp với DTO -->
+                            <input type="text" name="Name" class="form-control" required maxlength="255">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label">Mô tả</label>
+                        <div class="col-md-9">
+                            <textarea name="Description" class="form-control" rows="3"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                    <button type="submit" class="btn btn-primary save-button">Lưu lại</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- BẮT ĐẦU MODAL SỬA DANH MỤC -->
+<div class="modal fade" id="CategoryEditModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form name="categoryEditForm" role="form" class="form-horizontal">
+                <!-- CỰC KỲ QUAN TRỌNG: Thẻ input ẩn để lưu Id của danh mục đang sửa -->
+                <input type="hidden" name="Id" id="EditCategoryId" />
+                
+                <div class="modal-header">
+                    <h5 class="modal-title">Sửa thông tin danh mục</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group row required">
+                        <label class="col-md-3 col-form-label">Tên danh mục</label>
+                        <div class="col-md-9">
+                            <input type="text" name="Name" class="form-control" required maxlength="255">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label">Mô tả</label>
+                        <div class="col-md-9">
+                            <textarea name="Description" class="form-control" rows="3"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                    <button type="submit" class="btn btn-primary save-button">Cập nhật</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- KẾT THÚC MODAL SỬA -->
+
+@section scripts {
+<script src="~/view-resources/Views/Category/Index.js" asp-append-version="true"></script>
+}

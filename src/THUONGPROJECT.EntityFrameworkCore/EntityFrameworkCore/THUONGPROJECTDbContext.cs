@@ -13,6 +13,9 @@ namespace THUONGPROJECT.EntityFrameworkCore
         public THUONGPROJECTDbContext(DbContextOptions<THUONGPROJECTDbContext> options)
             : base(options)
         {
+
         }
+
+        public DbSet<Categories.Category> Categories { get; set; } // kết nối với bảng Categories trong cơ sở dữ liệu, để có thể thực hiện các thao tác CRUD (Create, Read, Update, Delete) trên bảng này thông qua Entity Framework Core
     }
 }

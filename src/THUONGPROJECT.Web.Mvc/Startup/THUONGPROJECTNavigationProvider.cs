@@ -135,7 +135,16 @@ namespace THUONGPROJECT.Web.Startup
                             )
                         )
                     )
-                );
+                )
+                .AddItem(
+                new MenuItemDefinition(
+                    "Category",
+                    new Abp.Localization.LocalizableString("Category", THUONGPROJECTConsts.LocalizationSourceName),
+                    url: "Category",
+                    icon: "fas fa-list"
+                    )
+                )
+                ;
         }
 
         private static ILocalizableString L(string name)
