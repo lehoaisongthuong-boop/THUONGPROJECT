@@ -1,5 +1,4 @@
 ﻿(function ($) {
-    // Bắt JS phải chờ HTML load xong 100% mới chạy
     $(document).ready(function () {
 
         var _categoryService = abp.services.app.category;
@@ -111,5 +110,5 @@
             });
         });
 
-    }); // ĐÓNG NGOẶC CỦA LỆNH CHỜ (Đã chuyển xuống đây)
+    }); 
 })(jQuery);

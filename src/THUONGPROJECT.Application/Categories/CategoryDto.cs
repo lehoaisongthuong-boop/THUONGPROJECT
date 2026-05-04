@@ -16,7 +16,7 @@ using Abp.AutoMapper;
 namespace THUONGPROJECT.Categories
 
 {
-    [AutoMapFrom(typeof(Category))]
+    [AutoMap(typeof(Category))]
     public class CategoryDto : EntityDto<int>
     { public string Name { get; set; }
        public string Description { get; set; }
