@@ -23,8 +23,8 @@
         <div class="card">
             <div class="card-header">
                 <div class="row">
+                    <!-- Cột 1: Ô tìm kiếm -->
                     <div class="col-md-6">
-                        <!-- Khung tìm kiếm -->
                         <div class="input-group">
                             <input type="text" id="txtSearchKeyword" class="form-control" placeholder="Tìm kiếm danh mục...">
                             <div class="input-group-append">
@@ -33,6 +33,16 @@
                                 </button>
                             </div>
                         </div>
+                    </div>
+        
+                    <!-- Cột 2: Bộ lọc sắp xếp -->
+                    <div class="col-md-4">
+                        <select id="ddlSort" class="form-control">
+                            <option value="CreationTime DESC">Mới nhất - Cũ nhất</option>
+                            <option value="CreationTime ASC">Cũ nhất - Mới nhất</option>
+                            <option value="Name ASC">Tên danh mục (A-Z)</option>
+                            <option value="Name DESC">Tên danh mục (Z-A)</option>
+                        </select>
                     </div>
                 </div>
             </div>

@@ -6,11 +6,23 @@
         var _$modal = $('#CategoryCreateModal');
         var _$form = _$modal.find('form');
 
-        // 1. Hàm lấy dữ liệu
+        // 1. Hàm lấy dữ liệu (Đã dùng tuyệt chiêu đi cửa sau)
         function getCategories() {
-            var keyword = $('#txtSearchKeyword').val();
-            _categoryService.getAll({
-                keyword: keyword
+            var keyword = $('#txtSearchKeyword').val() || '';
+            var sortingValue = $('#ddlSort').val() || '';
+
+            console.log("Bắt đầu gửi lệnh xuống máy chủ. Sắp xếp theo: " + sortingValue);
+
+            // Dùng $.ajax để ép trình duyệt phải gửi đầy đủ tham số, không qua trung gian
+            abp.ajax({
+                url: '/api/services/app/Category/GetAll', // Đường dẫn thẳng tới Backend
+                type: 'GET',
+                data: {
+                    keyword: keyword,
+                    sorting: sortingValue, // Tham số này sẽ không bị xóa nữa
+                    maxResultCount: 999,
+                    skipCount: 0
+                }
             }).done(function (result) {
                 _$tableBody.empty();
                 $.each(result.items, function (index, category) {
@@ -19,13 +31,13 @@
                     var catId = category.id || category.Id;
 
                     var row = `<tr>
-                        <td>${catName}</td>
-                        <td>${catDesc}</td>
-                        <td>
-                            <button class="btn btn-sm btn-info btn-edit" data-id="${catId}">Sửa</button>
-                            <button class="btn btn-sm btn-danger btn-delete" data-id="${catId}">Xóa</button>
-                        </td>
-                    </tr>`;
+                <td>${catName}</td>
+                <td>${catDesc}</td>
+                <td>
+                    <button class="btn btn-sm btn-info btn-edit" data-id="${catId}">Sửa</button>
+                    <button class="btn btn-sm btn-danger btn-delete" data-id="${catId}">Xóa</button>
+                </td>
+            </tr>`;
                     _$tableBody.append(row);
                 });
             });
@@ -109,6 +121,9 @@
                 abp.ui.clearBusy(_$editModal);
             });
         });
-
-    }); 
+        $('#ddlSort').change(function () {
+            getCategories();
+        });
+    });
+  
 })(jQuery);

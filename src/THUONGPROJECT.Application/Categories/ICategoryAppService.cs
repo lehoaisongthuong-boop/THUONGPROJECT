@@ -1,23 +1,10 @@
-﻿//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Text;
-//using System.Threading.Tasks;
+﻿using Abp.Application.Services;
+using THUONGPROJECT.Categories.Dto; // Gọi thư mục Dto vào
 
-//namespace THUONGPROJECT.Categories
-//{
-//    internal interface ICategoryAppService
-//    {
-//    }
-//} 
-using Abp.Application.Services;
-
- namespace THUONGPROJECT.Categories
+namespace THUONGPROJECT.Categories
 {
-        public interface ICategoryAppService : IAsyncCrudAppService<CategoryDto, int, PagedCategoryResultRequestDto, CreateCategoryDto, CategoryDto>
-        {
-
-        }
+    // Cập nhật lại tên PagedCategoryResultRequestDto cho khớp với class
+    public interface ICategoryAppService : IAsyncCrudAppService<CategoryDto, int, PagedCategoryResultRequestDto, CreateCategoryDto, CategoryDto>
+    {
+    }
 }
-
-

@@ -1,20 +1,11 @@
-﻿//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Text;
-//using System.Threading.Tasks;
+﻿using Abp.Application.Services.Dto;
 
-//namespace THUONGPROJECT.Categories
-//{
-//    internal class PagedCategoryResultRequestDto
-//    {
-//    }
-////}
- using Abp.Application.Services.Dto;
- namespace THUONGPROJECT.Categories
+namespace THUONGPROJECT.Categories.Dto
 {
-    public class PagedCategoryResultRequestDto : PagedResultRequestDto
+    // Đổi tên class cho khớp với Service
+    // Kế thừa đúng PagedAndSortedResultRequestDto để có tính năng Sắp xếp
+    public class PagedCategoryResultRequestDto : PagedAndSortedResultRequestDto
     {
-        public string Keyword { get; set; } // để lưu trữ từ khóa tìm kiếm, có thể được sử dụng để lọc danh sách các danh mục dựa trên tên hoặc mô tả của chúng
+        public string Keyword { get; set; }
     }
 }
