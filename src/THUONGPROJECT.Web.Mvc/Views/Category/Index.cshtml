@@ -3,15 +3,26 @@
     ViewBag.CurrentPageName = "Category"; 
 }
 
-<section class="content-header">
+@section styles {
+    <style>
+        .card-modern { border: none; border-radius: 12px; box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075); }
+        .table-modern th { background-color: #f8f9fa; border-top: none; font-weight: 600; color: #495057; }
+        .table-modern td { vertical-align: middle !important; }
+        .btn-modern { border-radius: 6px; font-weight: 500; transition: all 0.2s; }
+        .btn-modern:hover { transform: translateY(-1px); box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .input-modern { border-radius: 6px; }
+    </style>
+}
+
+<section class="content-header pt-4 pb-3">
     <div class="container-fluid">
-        <div class="row mb-2">
+        <div class="row mb-2 align-items-center">
             <div class="col-sm-6">
-                <h1>@ViewBag.Title</h1>
+                <h1 class="font-weight-bold text-dark"><i class="fas fa-tags text-primary mr-2"></i>@ViewBag.Title</h1>
             </div>
             <div class="col-sm-6 text-sm-right">
-                <button type="button" class="btn btn-primary" id="btnCreateCategory">
-                    <i class="fa fa-plus-square"></i> Thêm mới
+                <button type="button" class="btn btn-primary btn-modern shadow-sm" id="btnCreateCategory">
+                    <i class="fas fa-plus-circle mr-1"></i> Thêm mới
                 </button>
             </div>
         </div>
@@ -20,39 +31,47 @@
 
 <section class="content">
     <div class="container-fluid">
-        <div class="card">
-            <div class="card-header">
+        <div class="card card-modern">
+            <div class="card-header bg-white border-bottom-0 pt-4 pb-0">
                 <div class="row">
-                    <!-- Cột 1: Ô tìm kiếm -->
-                    <div class="col-md-6">
-                        <div class="input-group">
-                            <input type="text" id="txtSearchKeyword" class="form-control" placeholder="Tìm kiếm danh mục...">
+                    <!-- Ô tìm kiếm -->
+                    <div class="col-md-6 mb-3">
+                        <div class="input-group shadow-sm input-modern">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text bg-white border-right-0"><i class="fas fa-search text-muted"></i></span>
+                            </div>
+                            <input type="text" id="txtSearchKeyword" class="form-control border-left-0" placeholder="Nhập từ khóa tìm kiếm...">
                             <div class="input-group-append">
-                                <button class="btn btn-default" id="btnSearch" type="button">
-                                    <i class="fas fa-search"></i>
+                                <button class="btn btn-primary btn-modern" style="border-top-left-radius: 0; border-bottom-left-radius: 0;" id="btnSearch" type="button">
+                                    Tìm kiếm
                                 </button>
                             </div>
                         </div>
                     </div>
         
-                    <!-- Cột 2: Bộ lọc sắp xếp -->
-                    <div class="col-md-4">
-                        <select id="ddlSort" class="form-control">
-                            <option value="CreationTime DESC">Mới nhất - Cũ nhất</option>
-                            <option value="CreationTime ASC">Cũ nhất - Mới nhất</option>
-                            <option value="Name ASC">Tên danh mục (A-Z)</option>
-                            <option value="Name DESC">Tên danh mục (Z-A)</option>
-                        </select>
+                    <!-- Bộ lọc sắp xếp -->
+                    <div class="col-md-3 mb-3 offset-md-3">
+                        <div class="input-group shadow-sm input-modern">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text bg-white"><i class="fas fa-sort-amount-down text-muted"></i></span>
+                            </div>
+                            <select id="ddlSort" class="form-control">
+                                <option value="CreationTime DESC">Mới nhất</option>
+                                <option value="CreationTime ASC">Cũ nhất</option>
+                                <option value="Name ASC">Tên (A-Z)</option>
+                                <option value="Name DESC">Tên (Z-A)</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="card-body table-responsive p-0">
-                <table class="table table-hover text-nowrap" id="categoryTable">
+                <table class="table table-hover table-modern text-nowrap" id="categoryTable">
                     <thead>
                         <tr>
-                            <th>Tên danh mục</th>
+                            <th class="pl-4">Tên danh mục</th>
                             <th>Mô tả</th>
-                            <th style="width: 150px">Thao tác</th>
+                            <th class="text-center" style="width: 180px">Thao tác</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -61,40 +80,32 @@
             </div>
         </div>
     </div>
-
-
-
 </section>
 
 
 <div class="modal fade" id="CategoryCreateModal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content" style="border-radius: 12px; border: none; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
             <form name="categoryCreateForm" role="form" class="form-horizontal">
-                <div class="modal-header">
-                    <h5 class="modal-title">Thêm danh mục mới</h5>
+                <div class="modal-header border-bottom-0 pb-0">
+                    <h5 class="modal-title font-weight-bold text-primary">Thêm danh mục mới</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="form-group row required">
-                        <label class="col-md-3 col-form-label">Tên danh mục</label>
-                        <div class="col-md-9">
-                            
-                            <input type="text" name="Name" class="form-control" required maxlength="255">
-                        </div>
+                    <div class="form-group required">
+                        <label class="col-form-label font-weight-normal">Tên danh mục</label>
+                        <input type="text" name="Name" class="form-control input-modern bg-light" required maxlength="255" placeholder="Nhập tên danh mục...">
                     </div>
-                    <div class="form-group row">
-                        <label class="col-md-3 col-form-label">Mô tả</label>
-                        <div class="col-md-9">
-                            <textarea name="Description" class="form-control" rows="3"></textarea>
-                        </div>
+                    <div class="form-group">
+                        <label class="col-form-label font-weight-normal">Mô tả</label>
+                        <textarea name="Description" class="form-control input-modern bg-light" rows="3" placeholder="Nhập mô tả chi tiết..."></textarea>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
-                    <button type="submit" class="btn btn-primary save-button">Lưu lại</button>
+                <div class="modal-footer border-top-0 pt-0">
+                    <button type="button" class="btn btn-light btn-modern" data-dismiss="modal">Hủy</button>
+                    <button type="submit" class="btn btn-primary btn-modern save-button px-4">Lưu lại</button>
                 </div>
             </form>
         </div>
@@ -102,34 +113,29 @@
 </div>
 
 <div class="modal fade" id="CategoryEditModal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content" style="border-radius: 12px; border: none; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
             <form name="categoryEditForm" role="form" class="form-horizontal">
                 <input type="hidden" name="Id" id="EditCategoryId" />
-                
-                <div class="modal-header">
-                    <h5 class="modal-title">Sửa thông tin danh mục</h5>
+                <div class="modal-header border-bottom-0 pb-0">
+                    <h5 class="modal-title font-weight-bold text-info">Sửa thông tin danh mục</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="form-group row required">
-                        <label class="col-md-3 col-form-label">Tên danh mục</label>
-                        <div class="col-md-9">
-                            <input type="text" name="Name" class="form-control" required maxlength="255">
-                        </div>
+                    <div class="form-group required">
+                        <label class="col-form-label font-weight-normal">Tên danh mục</label>
+                        <input type="text" name="Name" class="form-control input-modern bg-light" required maxlength="255">
                     </div>
-                    <div class="form-group row">
-                        <label class="col-md-3 col-form-label">Mô tả</label>
-                        <div class="col-md-9">
-                            <textarea name="Description" class="form-control" rows="3"></textarea>
-                        </div>
+                    <div class="form-group">
+                        <label class="col-form-label font-weight-normal">Mô tả</label>
+                        <textarea name="Description" class="form-control input-modern bg-light" rows="3"></textarea>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
-                    <button type="submit" class="btn btn-primary save-button">Cập nhật</button>
+                <div class="modal-footer border-top-0 pt-0">
+                    <button type="button" class="btn btn-light btn-modern" data-dismiss="modal">Hủy</button>
+                    <button type="submit" class="btn btn-info btn-modern save-button px-4">Cập nhật</button>
                 </div>
             </form>
         </div>
@@ -137,5 +143,5 @@
 </div>
 
 @section scripts {
-<script src="~/view-resources/Views/Category/Index.js" asp-append-version="true"></script>
+    <script src="~/view-resources/Views/Category/Index.js" asp-append-version="true"></script>
 }

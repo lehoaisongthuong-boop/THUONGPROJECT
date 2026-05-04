@@ -31,13 +31,17 @@
                     var catId = category.id || category.Id;
 
                     var row = `<tr>
-                <td>${catName}</td>
-                <td>${catDesc}</td>
-                <td>
-                    <button class="btn btn-sm btn-info btn-edit" data-id="${catId}">Sửa</button>
-                    <button class="btn btn-sm btn-danger btn-delete" data-id="${catId}">Xóa</button>
-                </td>
-            </tr>`;
+    <td class="pl-4 font-weight-bold text-dark">${catName}</td>
+    <td class="text-muted" style="white-space: normal; max-width: 300px;">${catDesc}</td>
+    <td class="text-center">
+        <button class="btn btn-sm btn-outline-info btn-modern btn-edit shadow-sm mr-2" data-id="${catId}" title="Chỉnh sửa">
+            <i class="fas fa-pen"></i>
+        </button>
+        <button class="btn btn-sm btn-outline-danger btn-modern btn-delete shadow-sm" data-id="${catId}" title="Xóa">
+            <i class="fas fa-trash-alt"></i>
+        </button>
+    </td>
+</tr>`;
                     _$tableBody.append(row);
                 });
             });
