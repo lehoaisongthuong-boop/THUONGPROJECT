@@ -6,20 +6,20 @@
         var _$modal = $('#CategoryCreateModal');
         var _$form = _$modal.find('form');
 
-        // 1. Hàm lấy dữ liệu (Đã dùng tuyệt chiêu đi cửa sau)
+        // 1. Hàm lấy dữ liệu
         function getCategories() {
             var keyword = $('#txtSearchKeyword').val() || '';
             var sortingValue = $('#ddlSort').val() || '';
 
             console.log("Bắt đầu gửi lệnh xuống máy chủ. Sắp xếp theo: " + sortingValue);
 
-            // Dùng $.ajax để ép trình duyệt phải gửi đầy đủ tham số, không qua trung gian
+           
             abp.ajax({
                 url: '/api/services/app/Category/GetAll', // Đường dẫn thẳng tới Backend
                 type: 'GET',
                 data: {
                     keyword: keyword,
-                    sorting: sortingValue, // Tham số này sẽ không bị xóa nữa
+                    sorting: sortingValue,
                     maxResultCount: 999,
                     skipCount: 0
                 }
@@ -56,7 +56,7 @@
             _$modal.modal('show');
         });
 
-        // 4. Nút Lưu dữ liệu (Thêm mới)
+        // 4. Nút Lưu dữ liệu
         _$form.find('.save-button').click(function (e) {
             e.preventDefault();
             var categoryData = _$form.serializeFormToObject();
